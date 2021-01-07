@@ -73,15 +73,10 @@ function App() {
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
-    setOpen(false);
   };
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => alert(err.message));
-    setOpenSignIn(false);
   };
 
   return (

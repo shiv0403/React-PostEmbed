@@ -73,7 +73,6 @@ function App() {
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
-    setOpen(false);
   };
 
   const handleSignIn = (e) => {

@@ -73,7 +73,6 @@ function App() {
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
-    setOpen(false);
   };
 
   const handleSignIn = (e) => {
@@ -81,7 +80,6 @@ function App() {
     auth
       .signInWithEmailAndPassword(email, password)
       .catch((err) => alert(err.message));
-    setOpenSignIn(false);
   };
 
   return (

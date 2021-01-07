@@ -32,7 +32,6 @@ function App() {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
-  const [openSignIn, setOpenSignIn] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -55,6 +54,11 @@ function App() {
       if (authUser) {
         console.log(authUser);
         setUser(authUser);
+
+        if (authUser.displayName) {
+        } else {
+          return authUser.updateProfile({ displayName: username });
+        }
       } else {
         setUser(null);
       }
@@ -73,15 +77,6 @@ function App() {
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
-    setOpen(false);
-  };
-
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => alert(err.message));
-    setOpenSignIn(false);
   };
 
   return (
@@ -120,48 +115,13 @@ function App() {
           </form>
         </div>
       </Modal>
-      <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
-        <div className={classes.paper} style={modalStyle}>
-          <form className="app_signup">
-            <center>
-              <img
-                className="app_header_logo"
-                src="https://www.vectorlogo.zone/logos/instagram/instagram-wordmark.svg"
-                alt=""
-              />
-            </center>
-            <Input
-              type="email"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Input
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button type="submit" onClick={handleSignIn}>
-              Log In
-            </Button>
-          </form>
-        </div>
-      </Modal>
       <div className="app_header">
         <img
           className="app_header_logo"
           src="https://www.vectorlogo.zone/logos/instagram/instagram-wordmark.svg"
           alt=""
         />
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-        ) : (
-          <div className="app_login">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          </div>
-        )}
+        <Button onClick={() => setOpen(true)}>Sign Up</Button>
       </div>
       {posts.map(({ id, post }) => (
         <Post

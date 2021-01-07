@@ -32,7 +32,6 @@ function App() {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
-  const [openSignIn, setOpenSignIn] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -73,15 +72,6 @@ function App() {
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
-    setOpen(false);
-  };
-
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => alert(err.message));
-    setOpenSignIn(false);
   };
 
   return (
@@ -120,7 +110,7 @@ function App() {
           </form>
         </div>
       </Modal>
-      <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>
           <form className="app_signup">
             <center>
@@ -142,7 +132,7 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" onClick={handleSignIn}>
+            <Button type="submit" onClick={handleSignup}>
               Log In
             </Button>
           </form>

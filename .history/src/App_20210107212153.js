@@ -88,10 +88,10 @@ function App() {
 
   return (
     <div className="app">
-      {user?.displayName ? (
+      {user.displayName ? (
         <PostUpload username={user.displayName} />
       ) : (
-        <h3>Sorry! Please Login to upload</h3>
+        console.log("Sorry! Please Login to upload")
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>

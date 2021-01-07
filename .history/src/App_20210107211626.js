@@ -84,14 +84,15 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .catch((err) => alert(err.message));
     setOpenSignIn(false);
+    setIsLoggedIn(true);
   };
 
   return (
     <div className="app">
-      {user?.displayName ? (
+      {isLoggedIn ? (
         <PostUpload username={user.displayName} />
       ) : (
-        <h3>Sorry! Please Login to upload</h3>
+        alert("Sorry! Please Login to upload")
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>

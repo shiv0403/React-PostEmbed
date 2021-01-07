@@ -72,6 +72,7 @@ function App() {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
+        setIsLoggedIn(true);
         return authUser.user.updateProfile({ displayName: username });
       })
       .catch((err) => alert(err.message));
@@ -88,10 +89,10 @@ function App() {
 
   return (
     <div className="app">
-      {user?.displayName ? (
+      {isLoggedIn ? (
         <PostUpload username={user.displayName} />
       ) : (
-        <h3>Sorry! Please Login to upload</h3>
+        console.log("Sorry! Please Login to upload")
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>

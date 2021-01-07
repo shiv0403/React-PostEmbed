@@ -5,7 +5,7 @@ import Post from "./Post";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
-import PostUpload from "./PostUpload";
+import postUpload from "./postUpload";
 
 function getModalStyle() {
   const top = 50;
@@ -39,7 +39,6 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) => {
@@ -88,11 +87,6 @@ function App() {
 
   return (
     <div className="app">
-      {user?.displayName ? (
-        <PostUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry! Please Login to upload</h3>
-      )}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>
           <form className="app_signup">
@@ -178,6 +172,7 @@ function App() {
           imageUrl={post.imageUrl}
         />
       ))}
+      <postUpload username={user.displayName} />
     </div>
   );
 }

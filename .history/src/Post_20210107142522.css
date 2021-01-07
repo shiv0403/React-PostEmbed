@@ -1,0 +1,14 @@
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_header_about {
+  display: flex;
+  align-items: center;
+}
+
+.post_image > img {
+  object-fit: contain;
+}

@@ -1,0 +1,30 @@
+.post {
+  width: 40%;
+  margin: auto;
+  border: 0.1px solid #333333;
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_header_about {
+  display: flex;
+  align-items: center;
+}
+
+.post_image > img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.post_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post_footer_save {
+}

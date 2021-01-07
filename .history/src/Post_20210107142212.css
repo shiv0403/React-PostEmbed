@@ -1,0 +1,4 @@
+.post_header {
+  display: flex;
+  justify-content: space-evenly;
+}

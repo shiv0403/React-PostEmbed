@@ -1,0 +1,9 @@
+.post_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post_header_about {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  background-color: #fafafa;
+}
+
+.app_header {
+  padding: 20px;
+}
+
+.app_header_logo {
+  object-fit: contain;
+  height: 60px;
+}

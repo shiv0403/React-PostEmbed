@@ -110,7 +110,7 @@ function Post({ imageUrl, caption, username, postId, user }) {
         })}
       </div>
 
-      {user && (
+      {user.displayName && (
         <div className="post_addComment">
           <form onSubmit={handleComment} className="post_comment">
             <input

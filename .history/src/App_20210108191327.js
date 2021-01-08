@@ -57,6 +57,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
+        console.log(authUser);
         setUser(authUser);
       } else {
         setUser(null);
@@ -92,6 +93,7 @@ function App() {
 
   return (
     <div className="app">
+      {console.log(user)}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>
           <form className="app_signup">
@@ -169,7 +171,6 @@ function App() {
           </div>
         )}
       </div>
-      {console.log(user)}
       {posts.map(({ id, post }) => (
         <Post
           key={id}

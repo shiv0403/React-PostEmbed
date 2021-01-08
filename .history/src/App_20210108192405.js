@@ -169,7 +169,6 @@ function App() {
           </div>
         )}
       </div>
-      {console.log(user)}
       {posts.map(({ id, post }) => (
         <Post
           key={id}

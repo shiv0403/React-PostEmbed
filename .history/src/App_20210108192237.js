@@ -92,6 +92,7 @@ function App() {
 
   return (
     <div className="app">
+      {console.log(user)}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>
           <form className="app_signup">
@@ -169,12 +170,11 @@ function App() {
           </div>
         )}
       </div>
-      {console.log(user)}
       {posts.map(({ id, post }) => (
         <Post
           key={id}
           postId={id}
-          user={user}
+          user={user.displayName}
           username={post.username}
           caption={post.caption}
           imageUrl={post.imageUrl}

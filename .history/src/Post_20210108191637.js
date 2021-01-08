@@ -43,7 +43,7 @@ function Post({ imageUrl, caption, username, postId, user }) {
     e.preventDefault();
     db.collection("posts").doc(postId).collection("comments").add({
       text: comment,
-      username: user.displayName,
+      username: user?.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setComment("");
@@ -110,7 +110,7 @@ function Post({ imageUrl, caption, username, postId, user }) {
         })}
       </div>
 
-      {user && (
+      {user.displayName && (
         <div className="post_addComment">
           <form onSubmit={handleComment} className="post_comment">
             <input

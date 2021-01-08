@@ -20,7 +20,7 @@ const footerStyle = makeStyles({
 function Post({ imageUrl, caption, username, postId, user }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState([]);
-
+  console.log(username, " ", user);
   useEffect(() => {
     let unsubscribe;
     if (postId) {

@@ -1,0 +1,10 @@
+.postUpload {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+
+.postUpload > progress {
+  width: 100%;
+}

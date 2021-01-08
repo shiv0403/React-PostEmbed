@@ -1,0 +1,4 @@
+.postUpload {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,13 @@
+.postUpload {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  flex: 10;
+  background-color: #fff;
+}
+
+.postUpload > progress {
+  width: 100%;
+}

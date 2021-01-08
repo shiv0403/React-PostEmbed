@@ -11,12 +11,14 @@ function PostUpload({ username }) {
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
-      setImage(e.target?.files[0]);
+      setImage(e.target.files[0]);
+      console.log(image);
     }
   };
 
   const handleUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
+
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -30,22 +32,22 @@ function PostUpload({ username }) {
         alert(err.message);
       },
       () => {
-        console.log(image.name);
         storage
           .ref("images")
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
             db.collection("posts").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: firebase.firestore().FieldValue.serverTimeStamp(),
               caption: caption,
               imageUrl: url,
               username: username,
             });
-            setCaption("");
-            setImage(null);
-            setProgress(0);
           });
+
+        setCaption("");
+        setImage(null);
+        setProgress(0);
       }
     );
   };
@@ -53,19 +55,14 @@ function PostUpload({ username }) {
   return (
     <div className="postUpload">
       <div className="postUpload_form">
-        <div className="postUpload_form_select">
-          <progress value={progress} max="100" />
-          <input
-            type="text"
-            placeholder="Enter a caption..."
-            value={caption}
-            onChange={(event) => setCaption(event.target.value)}
-          />
-        </div>
-        <div className="postUpload_form_upload">
-          <input type="file" onChange={handleChange} />
-          <Button onClick={handleUpload}>Upload</Button>
-        </div>
+        <progress value={progress} max="100" />
+        <input
+          type="text"
+          placeholder="Enter a caption..."
+          onChange={(event) => setCaption(event)}
+        />
+        <input type="file" onChange={handleChange} />
+        <Button onClick={handleUpload}>Upload</Button>
       </div>
     </div>
   );

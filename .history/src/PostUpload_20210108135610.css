@@ -1,0 +1,17 @@
+.postUpload {
+  position: sticky;
+  bottom: 0;
+  flex: 10;
+  background-color: #ddd;
+}
+
+.postUpload_form {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.postUpload_form > progress {
+  width: 100%;
+}

@@ -42,16 +42,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
-    db.collection("posts")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setPosts(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            post: doc.data(),
-          }))
-        );
-      });
+    db.collection("posts").onSnapshot((snapshot) => {
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          post: doc.data(),
+        }))
+      );
+    });
   }, []);
 
   useEffect(() => {
@@ -79,7 +77,6 @@ function App() {
       })
       .catch((err) => alert(err.message));
     setOpen(false);
-    setIsLoggedIn(true);
   };
 
   const handleSignIn = (e) => {
@@ -88,12 +85,16 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .catch((err) => alert(err.message));
     setOpenSignIn(false);
-    setIsLoggedIn(true);
   };
 
   return (
     <div className="app">
-      {console.log(user)}
+      {isLoggedIn && <PostUpload username={user.displayName} />}
+      {/* {user?.displayName ? (
+        <PostUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry! Please Login to upload</h3>
+      )} */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={classes.paper} style={modalStyle}>
           <form className="app_signup">
@@ -179,7 +180,6 @@ function App() {
           imageUrl={post.imageUrl}
         />
       ))}
-      {isLoggedIn && <PostUpload username={user?.displayName} />}
     </div>
   );
 }

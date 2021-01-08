@@ -36,8 +36,9 @@ function PostUpload({ username }) {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
+            console.log(url);
             db.collection("posts").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              // timestamp: firebase.firestore.FieldValue.serverTimeStamp(),
               caption: caption,
               imageUrl: url,
               username: username,
@@ -58,8 +59,7 @@ function PostUpload({ username }) {
           <input
             type="text"
             placeholder="Enter a caption..."
-            value={caption}
-            onChange={(event) => setCaption(event.target.value)}
+            onChange={(event) => setCaption(event)}
           />
         </div>
         <div className="postUpload_form_upload">

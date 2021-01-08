@@ -30,22 +30,22 @@ function PostUpload({ username }) {
         alert(err.message);
       },
       () => {
-        console.log(image.name);
         storage
           .ref("images")
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
             db.collection("posts").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: firebase.firestore().FieldValue.serverTimeStamp(),
               caption: caption,
               imageUrl: url,
               username: username,
             });
-            setCaption("");
-            setImage(null);
-            setProgress(0);
           });
+
+        setCaption("");
+        setImage(null);
+        setProgress(0);
       }
     );
   };
@@ -58,8 +58,7 @@ function PostUpload({ username }) {
           <input
             type="text"
             placeholder="Enter a caption..."
-            value={caption}
-            onChange={(event) => setCaption(event.target.value)}
+            onChange={(event) => setCaption(event)}
           />
         </div>
         <div className="postUpload_form_upload">

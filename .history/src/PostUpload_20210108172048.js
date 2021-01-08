@@ -37,7 +37,7 @@ function PostUpload({ username }) {
           .getDownloadURL()
           .then((url) => {
             db.collection("posts").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: firebase.firestore.Timestamp
               caption: caption,
               imageUrl: url,
               username: username,

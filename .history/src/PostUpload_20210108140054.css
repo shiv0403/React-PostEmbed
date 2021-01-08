@@ -1,0 +1,31 @@
+.postUpload {
+  position: sticky;
+  bottom: 0;
+  flex: 10;
+  background-color: #f3f2f8;
+  padding: 10px;
+}
+
+.postUpload_form_select {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.postUpload_form_select > progress {
+  width: 100%;
+}
+
+.postUpload_form_select > input[type="text"] {
+  outline: none;
+  padding: 2px;
+}
+
+.postUpload_form_upload {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

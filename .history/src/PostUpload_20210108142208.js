@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import { storage, db } from "./firebase";
 import firebase from "firebase";
+import "firebase/firestore";
 import "./PostUpload.css";
 
 function PostUpload({ username }) {
@@ -10,9 +11,9 @@ function PostUpload({ username }) {
   const [progress, setProgress] = useState(0);
 
   const handleChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target?.files[0]);
-    }
+    // if (e.target.files[0]) {
+    setImage(e.target?.files[0]);
+    // }
   };
 
   const handleUpload = () => {
@@ -30,7 +31,6 @@ function PostUpload({ username }) {
         alert(err.message);
       },
       () => {
-        console.log(image.name);
         storage
           .ref("images")
           .child(image.name)
@@ -42,10 +42,11 @@ function PostUpload({ username }) {
               imageUrl: url,
               username: username,
             });
-            setCaption("");
-            setImage(null);
-            setProgress(0);
           });
+
+        setCaption("");
+        setImage(null);
+        setProgress(0);
       }
     );
   };
@@ -58,8 +59,7 @@ function PostUpload({ username }) {
           <input
             type="text"
             placeholder="Enter a caption..."
-            value={caption}
-            onChange={(event) => setCaption(event.target.value)}
+            onChange={(event) => setCaption(event)}
           />
         </div>
         <div className="postUpload_form_upload">

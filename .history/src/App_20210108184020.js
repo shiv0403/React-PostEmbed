@@ -182,7 +182,7 @@ function App() {
           imageUrl={post.imageUrl}
         />
       ))}
-      {isLoggedIn && <PostUpload username={user?.displayName} />}
+      {isLoggedIn && <PostUpload user={user?.displayName} />}
     </div>
   );
 }

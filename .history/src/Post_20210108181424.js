@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Post.css";
 import { IconButton } from "@material-ui/core";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -8,8 +8,6 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import SendIcon from "@material-ui/icons/Send";
 import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 import { makeStyles } from "@material-ui/core/styles";
-import firebase from "firebase";
-import { db } from "./firebase";
 
 const footerStyle = makeStyles({
   root: {
@@ -17,36 +15,11 @@ const footerStyle = makeStyles({
   },
 });
 
-function Post({ imageUrl, caption, username, postId, user }) {
+function Post({ imageUrl, caption, username, postId }) {
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState([]);
-
-  useEffect(() => {
-    let unsubscribe;
-    if (postId) {
-      unsubscribe = db
-        .collection("posts")
-        .doc(postId)
-        .collection("comments")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) => {
-          setComments(snapshot.docs.map((doc) => doc.data()));
-        });
-    }
-
-    return () => {
-      unsubscribe();
-    };
-  }, [postId]);
 
   const handleComment = (e) => {
     e.preventDefault();
-    db.collection("posts").doc(postId).collection("comments").add({
-      text: comment,
-      username: user?.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    setComment("");
   };
 
   const footerButtonsStyle = footerStyle();
@@ -98,33 +71,12 @@ function Post({ imageUrl, caption, username, postId, user }) {
         </p>
       </div>
 
-      <div className="post_comments">
-        {comments.map((comment) => {
-          return (
-            <p className="post_single_comment">
-              <strong>{comment.username}</strong>
-              {"  "}
-              {comment.text}
-            </p>
-          );
-        })}
+      <div className="post_addComment">
+        <form onSubmit={handleComment} className="post_comment">
+          <input type="text" placeholder="Add a comment..." />
+          <button className="post_addComment_button">Post</button>
+        </form>
       </div>
-
-      {user && (
-        <div className="post_addComment">
-          <form onSubmit={handleComment} className="post_comment">
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <button disabled={!comment} className="post_addComment_button">
-              Post
-            </button>
-          </form>
-        </div>
-      )}
     </div>
   );
 }

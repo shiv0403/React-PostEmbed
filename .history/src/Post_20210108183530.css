@@ -33,7 +33,6 @@
 
 .post_caption {
   padding: 5px 20px;
-  padding-bottom: 10px;
 }
 
 .post_comment {
@@ -62,9 +61,5 @@
 }
 
 .post_comments {
-  padding: 5px 20px;
-}
-
-.post_single_comment {
-  padding-bottom: 7px;
+  padding: 15px 20px;
 }

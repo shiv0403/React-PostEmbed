@@ -101,7 +101,7 @@ function Post({ imageUrl, caption, username, postId, user }) {
       <div className="post_comments">
         {comments.map((comment) => {
           return (
-            <p className="post_single_comment">
+            <p>
               <strong>{comment.username}</strong>
               {"  "}
               {comment.text}
@@ -110,21 +110,19 @@ function Post({ imageUrl, caption, username, postId, user }) {
         })}
       </div>
 
-      {user && (
-        <div className="post_addComment">
-          <form onSubmit={handleComment} className="post_comment">
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <button disabled={!comment} className="post_addComment_button">
-              Post
-            </button>
-          </form>
-        </div>
-      )}
+      <div className="post_addComment">
+        <form onSubmit={handleComment} className="post_comment">
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button disabled={!comment} className="post_addComment_button">
+            Post
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
